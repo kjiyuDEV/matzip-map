@@ -1,0 +1,66 @@
+@keyframes padding-active-animation {
+    0% {
+        padding: 20px;
+    }
+
+    100% {
+        padding: 40px 20px;
+    }
+}
+@keyframes padding-inactive-animation {
+    0% {
+        padding: 40px 20px;
+    }
+
+    100% {
+        padding: 20px;
+    }
+}
+// 검색결과 리스트모달
+.search-list-wrapper {
+    .close-btn {
+        position: absolute;
+        top: 8px;
+        right: 20px;
+        color: rgb(97, 97, 97);
+    }
+    .modal-title {
+        // text-align: center;
+        font-size: 12px;
+        // height: 30px;
+        border-bottom: solid 1px rgb(207, 207, 207);
+        width: 100%;
+        padding: 10px 20px;
+    }
+    .list-wrapper {
+        // border: solid 2px blue;
+
+        overflow-y: scroll;
+        height: 350px;
+    }
+    .list {
+        border-bottom: solid 1px rgb(231, 231, 231);
+        // margin: 10px 0;
+        padding: 20px;
+        .title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .category,
+        .link,
+        .address {
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+    }
+    .list.active {
+        padding: 40px 20px;
+        animation: padding-active-animation 0.4s ease;
+        background: rgb(255, 245, 224);
+    }
+    .list.inactive {
+        padding: 20px;
+        animation: padding-inactive-animation 0.4s ease;
+    }
+}
