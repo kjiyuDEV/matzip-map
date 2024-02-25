@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import searchReducer from "./redux/reducers/search";
 import menuReducer from "./redux/reducers/menu";
+import markerReducer from "./redux/marker";
 
 const persistConfig = {
     key: "root",
@@ -11,7 +12,7 @@ const persistConfig = {
     whitelist: [],
 };
 
-const rootReducer = combineReducers({ search: searchReducer, menu: menuReducer });
+const rootReducer = combineReducers({ search: searchReducer, menu: menuReducer, marker: markerReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
