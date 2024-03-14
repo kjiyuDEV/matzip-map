@@ -4,7 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import searchReducer from "./redux/reducers/search";
 import menuReducer from "./redux/reducers/menu";
-import markerReducer from "./redux/marker";
+import markerReducer from "./redux/reducers/marker";
 
 const persistConfig = {
     key: "root",

@@ -2,11 +2,10 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@font-face {
-    font-family: 'SUIT-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+html {
+    scroll-behavior: smooth;
 }
 html,
 body,
@@ -93,6 +92,7 @@ video {
     padding: 0;
     border: 0;
     vertical-align: baseline;
+    line-height: 1.5;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -149,10 +149,10 @@ button {
 }
 
 body {
+    font-family: 'Noto Sans KR', sans-serif;
     background: black;
     height: 100vh;
     margin: 0;
-    font-family: 'SUIT-Regular';
     font-size: 14px;
 }
 b {

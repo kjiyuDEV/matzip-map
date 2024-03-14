@@ -19,6 +19,6 @@
         "target": "es5",
         "forceConsistentCasingInFileNames": true
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "store.js"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "store.js", "components/common/SlideNav.js", "pages/api/search.js"],
     "exclude": ["node_modules"]
 }

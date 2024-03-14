@@ -34,6 +34,10 @@ export const searchReducer = (state = initialState, action: Action) => {
                     y: action.zoom.y,
                 }
             }
+        case TYPE.SET_SEARCH_INIT:
+            return {
+               ...initialState
+            }
         default:
             return state;
     }

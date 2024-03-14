@@ -1,13 +1,13 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 export interface Places extends mongoose.Document {
-    name: string
-    category: string
-    writer: string
-    description: string
-    address: string
-    x: number
-    y: number
+    name: string;
+    category: string;
+    writer: string;
+    comment: string;
+    address: string;
+    x: number;
+    y: number;
 }
 
 const PlacesSchema = new mongoose.Schema<Places>({
@@ -24,7 +24,7 @@ const PlacesSchema = new mongoose.Schema<Places>({
         required: true,
         maxLength: 60,
     },
-    description: {
+    comment: {
         type: String,
         required: false,
     },
@@ -40,6 +40,7 @@ const PlacesSchema = new mongoose.Schema<Places>({
         type: Number,
         required: true,
     },
-})
+});
 
-export default mongoose.models.Places || mongoose.model<Places>('places', PlacesSchema)
+export default mongoose.models.Places ||
+    mongoose.model<Places>('Places', PlacesSchema);

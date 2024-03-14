@@ -1,7 +1,6 @@
+import { NaverMap } from '@/types/map';
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-
-export type NaverMap = naver.maps.Map;
 
 export type ImageIcon = {
     url: string;
@@ -11,54 +10,42 @@ export type ImageIcon = {
 };
 
 const Marker = () => {
-    const { zoom } = useSelector((state) => {
+    const { zoom, markerList, search } = useSelector((state: any) => {
         return {
-            zoom: state.search.zoom
+            zoom: state.search.zoom,
+            markerList: state.marker.list,
+            search: state.search,
         };
     });
 
+    console.log(search, '??');
 
     const markerRef = useRef<NaverMap | null>(null);
     const mapRef = useRef<NaverMap | null>(null);
+    console.log(mapRef);
     useEffect(() => {
-        const mapOptions = {
-            center: new window.naver.maps.LatLng([zoom.x, zoom.y]),
-            zoom: 15,
-            minZoom: 9,
-            scaleControl: false,
-            mapDataControl: false,
-            logoControlOptions: {
-                position: naver.maps.Position.BOTTOM_LEFT,
-            },
-        };
+        const map = mapRef.current;
+        if (map && search.list.length > 0) {
+            console.log(zoom, '<<');
+            const point = new window.naver.maps.Point(zoom.x, zoom.y - 0.001); // 지도에서 이동할 좌표
+            var marker = new window.naver.maps.Marker({
+                map,
+                position: new window.naver.maps.LatLng(zoom.y, zoom.x),
+                icon: {
+                    content: `<p></p><img src="/img/marker_active.png" style=width:30px />`,
+                    size: new naver.maps.Size(22, 36), //아이콘 크기
+                    origin: new naver.maps.Point(0, 0),
+                    anchor: new naver.maps.Point(11, 35),
+                },
+            });
+            mapRef.current = map;
+            markerRef.current = marker;
 
-        /** https://navermaps.github.io/maps.js.ncp/docs/tutorial-2-Getting-Started.html */
-        const map = new window.naver.maps.Map('map', mapOptions);
+            // map.setCenter(point)
+            marker.setPosition(new window.naver.maps.LatLng(zoom.y, zoom.x));
+        }
+    }, [zoom, search.list, mapRef]);
 
-
-
-        console.log('!!!')
-        console.log({
-            map: map,
-            position: new window.naver.maps.LatLng(zoom.x, zoom.y),
-
-        })
-        /** https://navermaps.github.io/maps.js.ncp/docs/tutorial-2-Marker.html */
-        markerRef.current = new window.naver.maps.Marker({
-            map: map,
-            position: new window.naver.maps.LatLng(zoom.x, zoom.y),
-        });
-
-
-        // if (onClick) {
-        //     naver.maps.Event.addListener(marker, 'click', onClick);
-        // }
-
-        // return () => {
-        //     marker?.setMap(null);
-        // };
-    }, [zoom]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    return null;
+    return <></>;
 };
 export default Marker;

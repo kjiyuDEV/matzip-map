@@ -24,6 +24,7 @@
         right: 20px;
         color: rgb(97, 97, 97);
     }
+
     .modal-title {
         // text-align: center;
         font-size: 12px;
@@ -34,7 +35,6 @@
     }
     .list-wrapper {
         // border: solid 2px blue;
-
         overflow-y: scroll;
         height: 350px;
     }
@@ -42,6 +42,8 @@
         border-bottom: solid 1px rgb(231, 231, 231);
         // margin: 10px 0;
         padding: 20px;
+        position: relative;
+        width: auto;
         .title {
             font-size: 16px;
             font-weight: 700;
@@ -52,6 +54,21 @@
         .address {
             font-size: 12px;
             margin-bottom: 3px;
+            overflow: hidden;
+            width: 100%;
+            text-wrap: nowrap;
+            text-overflow: ellipsis;
+        }
+        .submit-button {
+            position: absolute;
+            right: -30px;
+            top: 17%;
+            height: 30px;
+            width: 100px;
+            border-radius: 5px;
+            border: solid 1px rgb(168, 168, 168);
+            font-size: 12px;
+            transform: translate(-50%, -50%);
         }
     }
     .list.active {
@@ -63,4 +80,141 @@
         padding: 20px;
         animation: padding-inactive-animation 0.4s ease;
     }
+}
+
+.marker-wrapper {
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        color: rgb(97, 97, 97);
+    }
+    .album {
+        width: 100%;
+        position: relative;
+        top: 50px;
+        display: grid;
+        justify-content: center;
+        overflow: hidden;
+        grid-template-columns: 90px 90px 90px 90px;
+        grid-template-rows: repeat(2, (90px));
+        grid-gap: 1px;
+    }
+    .img-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .img-wrap > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .img-wrap:first-child {
+        grid-column: 1 / span 2;
+        grid-row: 1 / span 2;
+    }
+    .marker-info {
+        grid-column: 1 / span 4;
+        grid-row: 4 / span 1;
+        p {
+            font-size: 12px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .comment > p {
+            // font-weight: 600;
+            font-size: 12px;
+        }
+    }
+}
+
+.popup-modal {
+    .confirm-wrap {
+        .text {
+            height: 120px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+        .btn-wrap {
+            // border: solid 2px red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            button {
+                border-radius: 5px;
+                width: 80px;
+                margin: 0 3px;
+                height: 50px;
+                color: white;
+                font-size: 14px;
+                &:first-child {
+                    width: 140px;
+                    background-color: rgb(194, 109, 109);
+                }
+                &:nth-child(2) {
+                    background: rgb(185, 185, 185);
+                }
+            }
+        }
+    }
+
+    .modal-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+        .submit-wrap {
+            // position: absolute;
+            margin-top: 30px;
+            top: 40px;
+            width: 85%;
+            .form-wrap {
+                display: flex;
+                flex-direction: column;
+                margin-top: 8px;
+                label {
+                    font-weight: 700;
+                }
+                input {
+                    margin: 2px 0;
+                    border: solid 1px rgb(145, 145, 145);
+                    height: 30px;
+                    padding: 0 10px;
+                    &::placeholder {
+                        color: rgb(180, 180, 180);
+                    }
+                }
+            }
+        }
+        .btn-wrap {
+            margin: 20px 0;
+            button {
+                width: 140px;
+                background-color: rgb(194, 109, 109);
+                height: 40px;
+                border-radius: 5px;
+                color: white;
+            }
+        }
+    }
+}
+
+// 지도
+.custom-marker {
+    background: white;
+    width: 8vh;
+    height: 3vh;
+    text-align: center;
+    box-shadow: 0px 0px 10px grey;
 }

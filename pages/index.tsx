@@ -34,8 +34,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 
   /* Ensures all objectIds and nested objectIds are serialized as JSON data */
   const placesProps = result.map((doc) => {
-    const pet = JSON.parse(JSON.stringify(doc));
-    return pet;
+    const place = JSON.parse(JSON.stringify(doc));
+    return place;
   });
 
   return { props: { places: placesProps } };

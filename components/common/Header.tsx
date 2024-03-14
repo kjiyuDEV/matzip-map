@@ -1,9 +1,8 @@
-import Image from 'next/image'
-import React from 'react'
-import logo from '../../styles/img/logo.png'
-import axios from 'axios'
-import { useDispatch } from 'react-redux'
-import { TYPE } from '@/redux/types'
+import Image from 'next/image';
+import React from 'react';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { TYPE } from '@/redux/types';
 
 interface HeaderProps {
     setSearchInput: (input: string) => void;
@@ -11,10 +10,11 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ setSearchInput, searchInput }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const handleSubmit = async () => {
-        if (!searchInput || searchInput.trim() === '') return alert('검색이 유효하지 않아요')
+        if (!searchInput || searchInput.trim() === '')
+            return alert('검색이 유효하지 않아요');
         const {
             data: { items },
         } = await axios.get('/v1/search/local.json', {
@@ -24,43 +24,49 @@ const Header: React.FC<HeaderProps> = ({ setSearchInput, searchInput }) => {
             },
             headers: {
                 'Content-Type': 'application/json',
-                'X-Naver-Client-Id': 'HkmoZuvadMifi4PVKacA',
-                'X-Naver-Client-Secret': '3ABiVxxIe8',
+                'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
+                'X-Naver-Client-Secret': process.env.NEXT_PUBLIC_NAVER_SECRET,
             },
-        })
+        });
 
         dispatch({
             type: TYPE.SET_SEARCH_LIST,
             list: items,
-        })
+        });
         dispatch({
-            type: TYPE.SLIDE_MODAL_OPEN
-        })
-        if (items.length === 0) return alert('검색이 유효하지 않아요')
+            type: TYPE.SLIDE_MODAL_OPEN,
+            content: 'searchList',
+        });
+        if (items.length === 0) return alert('검색이 유효하지 않아요');
         naver.maps.Service.geocode(
             {
                 query: items[0].roadAddress,
             },
             (status, response) => {
                 if (status !== naver.maps.Service.Status.OK) {
-                    return alert('Something wrong!')
+                    return alert('Something wrong!');
                 }
-                const zoom = response.v2.addresses
-                console.log(zoom, '<zoom')
-                console.log(Number(zoom[0].y) - 0.5)
+                const zoom = response.v2.addresses;
+                console.log(zoom, '<zoom');
+                console.log(Number(zoom[0].y) - 0.5);
                 dispatch({
                     type: TYPE.SET_ADDRESS_ZOOM,
                     zoom: { x: Number(zoom[0].x), y: Number(zoom[0].y) },
-                })
-            },
-        )
-    }
-    console.log(searchInput, '<searchInput')
+                });
+            }
+        );
+    };
 
     return (
         <>
             <div className="header">
-                <Image src={logo} alt="logo image" className="logo" />
+                <Image
+                    src={'/img/logo.png'}
+                    alt="logo image"
+                    className="logo"
+                    width={100}
+                    height={100}
+                />
                 <div className="input-wrap">
                     <input
                         className="search-input"
@@ -75,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({ setSearchInput, searchInput }) => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
