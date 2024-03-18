@@ -35,6 +35,18 @@ const Submit = () => {
             x: zoom.x,
             y: zoom.y,
         });
+        dispatch({
+            type: TYPE.POPUP_MODAL_CLOSE,
+        });
+        dispatch({
+            type: TYPE.SLIDE_MODAL_CLOSE,
+        });
+        const res = await axios.get(`/api/insertPlace`);
+        console.log(res);
+        dispatch({
+            type: TYPE.SET_MARKER,
+            list: res.data,
+        });
     };
 
     return (

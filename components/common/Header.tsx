@@ -15,32 +15,25 @@ const Header: React.FC<HeaderProps> = ({ setSearchInput, searchInput }) => {
     const handleSubmit = async () => {
         if (!searchInput || searchInput.trim() === '')
             return alert('검색이 유효하지 않아요');
-        const {
-            data: { items },
-        } = await axios.get('/v1/search/local.json', {
-            params: {
-                query: searchInput,
-                display: 5,
-            },
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
-                'X-Naver-Client-Secret': process.env.NEXT_PUBLIC_NAVER_SECRET,
-            },
-        });
+        const items = await axios.get(
+            'https://t1427jw7i2.execute-api.us-east-1.amazonaws.com/default/navermap',
+            { params: { key: searchInput } }
+        );
 
+        const item = JSON.parse(items.data);
+        console.log(item.items, '<item');
         dispatch({
             type: TYPE.SET_SEARCH_LIST,
-            list: items,
+            list: item.items,
         });
         dispatch({
             type: TYPE.SLIDE_MODAL_OPEN,
             content: 'searchList',
         });
-        if (items.length === 0) return alert('검색이 유효하지 않아요');
+        if (item.items.length === 0) return alert('검색이 유효하지 않아요');
         naver.maps.Service.geocode(
             {
-                query: items[0].roadAddress,
+                query: item.items[0].roadAddress,
             },
             (status, response) => {
                 if (status !== naver.maps.Service.Status.OK) {

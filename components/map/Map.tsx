@@ -152,7 +152,7 @@ const Map = () => {
                     item.x || item.position.x
                 ),
                 icon: {
-                    content: `<img src="/img/${searchMarker ? 'marker_active' : 'star'}.png" style=width:30px />`,
+                    content: `<img src="/img/${searchMarker && slideModal.open ? 'marker_active' : 'star'}.png" style=width:30px />`,
                     size: new naver.maps.Size(24, 36), //아이콘 크기
                     origin: new naver.maps.Point(0, 0),
                     anchor: new naver.maps.Point(11, 35),
@@ -161,8 +161,6 @@ const Map = () => {
             markerClickEvent(markerRef.current, item);
         });
     }, [totalMarkers, selectedMarker.current]);
-
-    console.log(searchMarker, '<searchMarker');
 
     useEffect(() => {
         if (!slideModal.open) {

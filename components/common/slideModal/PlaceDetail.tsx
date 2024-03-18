@@ -86,7 +86,9 @@ const PlaceDetail = () => {
                     </div>
                 ))}
                 <div className="marker-info">
-                    <p className="title">{slideModal.data.name}</p>
+                    <p className="title">
+                        {slideModal.data.name.replace('&amp;', '&')}
+                    </p>
                     <p>{slideModal.data.category}</p>
                     <p>{slideModal.data.address}</p>
                     <br />
